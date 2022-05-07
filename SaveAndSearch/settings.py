@@ -78,8 +78,12 @@ WSGI_APPLICATION = 'SaveAndSearch.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'dj74e6l75896t',
+        'HOST': 'ec2-52-203-118-49.compute-1.amazonaws.com',
+        'PORT':5432,
+        'USER':'jtrjxmrkfpohfh',
+        'PASSWORD':'160622579e96cc6afccee123f5b8cc0e181f546d5adb2791f656b8fda428d5c6'
     }
 }
 
