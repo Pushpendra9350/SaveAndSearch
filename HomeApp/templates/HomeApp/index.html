@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <form class='searc_form'  method='POST' action = "{% url 'search' %}" >
+        <input name="csrfmiddlewaretoken" type="hidden" value="{{ csrf_token }}">
+        <input id='search_query' type='search' placeholder = 'Search..' class='form-control' name='searchquery'></input>
+        <button type='submit' class="btn btn-primary btns" style='color:white'>Search</button>
+    </form>
+
+    <div class="searchbar">
+    <a href="{% url 'home' %}" class="btn btn-outline-secondary">Home</a>&nbsp&nbsp&nbsp&nbsp&nbsp
+    <a type="button" class="btn btn-success" style="color:white" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Add New</a>
+    </div>
+    <br>
+    <br>
+    <br>
+    
+    <div class="accordion" id="accordionExample">
+    {% for post in posts %}
+    <div style='border:1px solid rgb(211, 211, 211); border-radius:5px;margin-bottom:15px'>
+        <div class="card cardcustom" id="headingOne">
+            <button class="custombtn btn btn-link" type="button" data-toggle="collapse" data-target="#postcard{{ post.id }}" aria-expanded="true" aria-controls="{{ post.id }}">
+                {{ post.title }}
+            </button>
+        </div>
+    
+        <div id="postcard{{ post.id }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+          <div class="card-body">
+            {{ post.content }}
+          </div>
+        </div>
+      </div>
+{% endfor %}
+    </div>
+</div>
+
+
+<form  method='POST' action = "{% url 'create' %}">
+    {% csrf_token %}
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">New Note</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form>
+            <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Title:</label>
+                <input type="text" class="form-control" id="recipient-name" name='title'>
+            </div>
+            <div class="form-group">
+                <label for="message-text" class="col-form-label">Content:</label>
+                <textarea class="form-control" id="message-text" name='content'></textarea>
+            </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+        </div>
+    </div>
+    </div>
+</form>
+
+
+{% endblock %}

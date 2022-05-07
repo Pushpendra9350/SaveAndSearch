@@ -1,0 +1,37 @@
+.searchbar{
+    margin: 10px;
+}
+.btns{
+    margin-top: 10px;
+    float: right;
+}
+
+
+
+.custombtn{
+    color: rgb(56, 56, 56) !important;
+    text-decoration: none !important;
+    text-align: start !important;
+}
+
+.custombtn:hover{
+    color: rgb(103, 103, 103) !important;
+    text-decoration: none !important;
+}
+
+.cardcustom{
+    border-radius: 5px !important;
+    background-color: rgb(233, 233, 233) !important;
+    border: none !important;
+    padding: 5px;
+    box-shadow: 1px 1px 5px 1px rgba(142, 142, 142, 0.2) !important;
+}
+
+.card-header{
+    border-bottom: none !important;
+    margin: 10px;
+}
+
+.searc_form{
+    margin-top: 15px !important;
+}
