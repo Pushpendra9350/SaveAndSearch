@@ -4,13 +4,13 @@
 <div class="container">
     <form class='searc_form'  method='POST' action = "{% url 'search' %}" >
         <input name="csrfmiddlewaretoken" type="hidden" value="{{ csrf_token }}">
-        <input id='search_query' type='search' placeholder = 'Search..' class='form-control' name='searchquery'></input>
+        <input id='search_query' type='search' placeholder = 'Search here...' class='form-control' name='searchquery'></input>
         <button type='submit' class="btn btn-primary btns" style='color:white'>Search</button>
     </form>
 
     <div class="searchbar">
     <a href="{% url 'home' %}" class="btn btn-outline-secondary">Home</a>&nbsp&nbsp&nbsp&nbsp&nbsp
-    <a type="button" class="btn btn-success" style="color:white" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Add New</a>
+    <a onClick='addnew()' type="button" class="btn btn-success" style="color:white" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Add New</a>
     </div>
     <br>
     <br>
@@ -19,14 +19,21 @@
     <div class="accordion" id="accordionExample">
     {% for post in posts %}
     <div style='border:1px solid rgb(211, 211, 211); border-radius:5px;margin-bottom:15px'>
-        <div class="card cardcustom" id="headingOne">
-            <button class="custombtn btn btn-link" type="button" data-toggle="collapse" data-target="#postcard{{ post.id }}" aria-expanded="true" aria-controls="{{ post.id }}">
-                {{ post.title }}
-            </button>
+        <div class="card cardcustom" id="post{{ post.id }}">
+            <div class="row" >
+                <div class="col-8" data-toggle="collapse" data-target="#postcard{{ post.id }}" aria-expanded="true" aria-controls="{{ post.id }}">
+                    <button id="title{{ post.id }}" class="custombtn btn btn-link">
+                        {{ post.title }}
+                    </button>
+                </div>
+                <div class="col-4">
+                    <a id="{{ post.id }}" onClick='update(id)' data-toggle="modal" data-target="#exampleModal" href='#' class='btn' style='color:grey'>update</a>
+                </div>
+              </div>
         </div>
     
         <div id="postcard{{ post.id }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-          <div class="card-body">
+          <div id="content{{ post.id }}" class="card-body">
             {{ post.content|linebreaks }}
           </div>
         </div>
@@ -42,7 +49,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">New Note</h5>
+            <h5 class="modal-title">Note</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
@@ -50,22 +57,20 @@
         <div class="modal-body">
             <form>
             <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Title:</label>
-                <input type="text" class="form-control" id="recipient-name" name='title'>
+                <label for="title" class="col-form-label">Title:</label>
+                <input type="text" class="form-control" id="title" name='title'>
             </div>
             <div class="form-group">
-                <label for="message-text" class="col-form-label">Content:</label>
-                <textarea class="form-control" id="message-text" name='content'></textarea>
+                <label for="content" class="col-form-label">Content:</label>
+                <textarea class="form-control" id="content" name='content'></textarea>
             </div>
             </form>
         </div>
         <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">Add</button>
+            <button type="submit" class="btn btn-primary">Add Note</button>
         </div>
         </div>
     </div>
     </div>
 </form>
-
-
 {% endblock %}

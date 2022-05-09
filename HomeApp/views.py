@@ -1,8 +1,32 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .models import *
+
+
+def loginUser(request):
+    try:
+        if request.method == 'POST':
+            password = request.POST['password']
+            user = authenticate(request, username='admin', password=password)
+            print(user, password)
+            if user is not None:
+                print('if')
+                login(request, user)
+                return redirect('home')
+            else:
+                print('else')
+                return render(request, 'HomeApp/login.html')
+        else:
+            return render(request, 'error.html')
+    except Exception as e:
+        return render(request, 'error.html')
+
+
+def loginpage(request):
+    return render(request, 'HomeApp/login.html')
 
 
 @login_required
@@ -27,21 +51,19 @@ def create(request):
         if request.method == 'POST':
             title = request.POST['title']
             content = request.POST['content']
-            Posts.objects.create(
-                title=title,
-                content=content,
-            )
-            posts = Posts.objects.all().order_by('-updated_at')[:51]
-            new_posts = []
-            counter = 0
-            for i in posts:
-                counter += 1
-                dicts = {} 
-                dicts['id'] = str(counter)+'id'
-                dicts['title'] = i.title
-                dicts['content'] = i.content
-                new_posts.append(dicts)
-            return render(request, 'HomeApp/index.html', {'posts': new_posts})
+            if title=='' or content=='':
+                return redirect('/')
+            else:
+                if Posts.objects.filter(title=title).exists():
+                    Posts.objects.filter(title=title).update(
+                        content=content
+                    )
+                else:
+                    Posts.objects.create(
+                        title=title,
+                        content=content,
+                    )
+            return redirect('/')
         else:
             return render(request, 'error.html')
     except Exception as e:

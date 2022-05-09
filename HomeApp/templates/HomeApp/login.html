@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="card mt-5">
+        <div class="card-header">
+          Login
+        </div>
+        <div class="card-body">
+            <form method='POST' action = "{% url 'login-user' %}">
+                {% csrf_token %}
+                <input type="password" name='password' class="form-control" id="inputPassword2" placeholder="Password">
+                <button type="submit" class="btn btn-primary mb-2 float-right mt-3">Login</button>
+            </form>
+        </div>
+      </div>
+    
+</div>
+{% endblock %}
