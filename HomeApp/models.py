@@ -1,4 +1,5 @@
 from django.db import models
+
 # Create your models here.
 
 class Posts(models.Model):
@@ -10,7 +11,7 @@ class Posts(models.Model):
         return self.title
 
     class Meta:
-        ordering = ['-created_at']
+        ordering = ['-updated_at']
         verbose_name = 'Posts'
         verbose_name_plural = 'Posts'
 

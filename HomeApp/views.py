@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .models import *
 
-
 def loginUser(request):
     try:
         if request.method == 'POST':
