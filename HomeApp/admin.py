@@ -8,5 +8,5 @@ from import_export.admin import ImportExportModelAdmin
 
 @admin.register(Posts)
 class PostsAdmin(ImportExportModelAdmin):
-    list_display = ('title', 'updated_at')
+    list_display = ('title', 'last_updated')
     

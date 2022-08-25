@@ -77,17 +77,26 @@ WSGI_APPLICATION = 'SaveAndSearch.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dj74e6l75896t',
-        'HOST': 'ec2-52-203-118-49.compute-1.amazonaws.com',
-        'PORT':5432,
-        'USER':'jtrjxmrkfpohfh',
-        'PASSWORD':'160622579e96cc6afccee123f5b8cc0e181f546d5adb2791f656b8fda428d5c6'
+if DEBUG:
+    # Sqlite Database Configuration
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
-}
+
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'dj74e6l75896t',
+            'HOST': 'ec2-52-203-118-49.compute-1.amazonaws.com',
+            'PORT':5432,
+            'USER':'jtrjxmrkfpohfh',
+            'PASSWORD':'160622579e96cc6afccee123f5b8cc0e181f546d5adb2791f656b8fda428d5c6'
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators

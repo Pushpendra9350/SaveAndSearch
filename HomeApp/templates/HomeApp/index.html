@@ -15,33 +15,31 @@
     <br>
     <br>
     <br>
-    
     <div class="accordion" id="accordionExample">
-    {% for post in posts %}
-    <div style='border:1px solid rgb(211, 211, 211); border-radius:5px;margin-bottom:15px'>
-        <div class="card cardcustom" id="post{{ post.id }}">
-            <div class="row" >
-                <div class="col-8" data-toggle="collapse" data-target="#postcard{{ post.id }}" aria-expanded="true" aria-controls="{{ post.id }}">
-                    <button id="title{{ post.id }}" class="custombtn btn btn-link">
-                        {{ post.title }}
-                    </button>
+        {% for post in posts %}
+        <div style='border:1px solid rgb(211, 211, 211); border-radius:5px;margin-bottom:15px'>
+            <div class="card cardcustom" id="post{{ post.id }}">
+                <div class="row" >
+                    <div class="col-8" data-toggle="collapse" data-target="#postcard{{ post.id }}" aria-expanded="true" aria-controls="{{ post.id }}">
+                        <button id="title{{ post.id }}" class="custombtn btn btn-link">
+                            {{ post.title }}
+                        </button>
+                    </div>
+                    <div class="col-4">
+                        <a id="{{ post.id }}" onClick='update(id)' data-toggle="modal" data-target="#exampleModal" href='#' class='btn' style='color:grey'>update<i class="fa fa-refresh" aria-hidden="true"></i></a>
+                    </div>
                 </div>
-                <div class="col-4">
-                    <a id="{{ post.id }}" onClick='update(id)' data-toggle="modal" data-target="#exampleModal" href='#' class='btn' style='color:grey'>update</a>
-                </div>
-              </div>
+            </div>
+        
+            <div id="postcard{{ post.id }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div id="content{{ post.id }}" class="card-body">
+                {{ post.content|linebreaks }}
+            </div>
+            </div>
         </div>
-    
-        <div id="postcard{{ post.id }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-          <div id="content{{ post.id }}" class="card-body">
-            {{ post.content|linebreaks }}
-          </div>
-        </div>
-      </div>
-{% endfor %}
+        {% endfor %}
     </div>
 </div>
-
 
 <form  method='POST' action = "{% url 'create' %}">
     {% csrf_token %}
@@ -62,7 +60,7 @@
             </div>
             <div class="form-group">
                 <label for="content" class="col-form-label">Content:</label>
-                <textarea class="form-control" id="content" name='content'></textarea>
+                <textarea class="form-control textaread" id="content" name='content'></textarea>
             </div>
             </form>
         </div>
@@ -73,6 +71,4 @@
     </div>
     </div>
 </form>
-
-
 {% endblock %}

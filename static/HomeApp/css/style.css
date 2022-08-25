@@ -1,11 +1,23 @@
 .searchbar{
     margin: 10px;
 }
+
+.textaread{
+    height: 300px !important;
+}
+
+html body{
+    background-color: #cfd2d2;
+}
+
+.card-body{
+    background-color: #ffffff;
+}
+
 .btns{
     margin-top: 10px;
     float: right;
 }
-
 
 
 .custombtn{
@@ -21,7 +33,7 @@
 
 .cardcustom{
     border-radius: 5px !important;
-    background-color: rgb(233, 233, 233) !important;
+    background-color: #f3f3f3 !important;
     border: none !important;
     padding: 5px;
     box-shadow: 1px 1px 5px 1px rgba(142, 142, 142, 0.2) !important;
@@ -35,3 +47,10 @@
 .searc_form{
     margin-top: 15px !important;
 }
+
+@media screen and (max-width: 700px) {
+    .list-col {
+      
+      display: block;
+    }
+  }
